@@ -1,6 +1,7 @@
 def dfs_path(graph, start, end, path=None):
     """
     Обход графа в глубину с поиском пути от start до end и обработкой исключений.
+    # Добавлен комментарий - проверка наличия вершин в графе
     """
     if start not in graph or end not in graph:
         raise ValueError("Начальная или конечная вершина не существует в графе.")
@@ -10,6 +11,7 @@ def dfs_path(graph, start, end, path=None):
     if start == end:
         return path
     for neighbor in graph[start]:
+        # Проверяем, не посетили ли мы уже эту вершину
         if neighbor not in path:
             try:
                 new_path = dfs_path(graph, neighbor, end, path + [neighbor])
@@ -19,27 +21,48 @@ def dfs_path(graph, start, end, path=None):
                 pass  # Пропускаем, если во время рекурсии возникла ошибка
     return None
 
+# def dfs_path(graph, start, end, path=None):
+#     """
+#     Обход графа в глубину с поиском пути от start до end и обработкой исключений.
+#     """
+#     if start not in graph or end not in graph:
+#         raise ValueError("Начальная или конечная вершина не существует в графе.")
 
-# Пример использования
-graph = {
-    1: {3},
-    2: {4},
-    3: {1},
-    4: {2}
-}
-start_node = 2
-end_node = 5  # Некорректная вершина
+#     if path is None:
+#         path = [start]
+#     if start == end:
+#         return path
+#     for neighbor in graph[start]:
+#         if neighbor not in path:
+#             try:
+#                 new_path = dfs_path(graph, neighbor, end, path + [neighbor])
+#                 if new_path:
+#                     return new_path
+#             except ValueError:
+#                 pass  # Пропускаем, если во время рекурсии возникла ошибка
+#     return None
 
-try:
-    path = dfs_path(graph, start_node, end_node)
 
-    if path:
-        print(f"Путь от {start_node} до {end_node}: {path}")
-        print(f"Длина пути: {len(path) - 1}")  # Длина пути - количество ребер
-    else:
-        print(f"Путь от {start_node} до {end_node} не найден.")
-except ValueError as e:
-    print(f"Ошибка: {e}")
+# # Пример использования
+# graph = {
+#     1: {3},
+#     2: {4},
+#     3: {1},
+#     4: {2}
+# }
+# start_node = 2
+# end_node = 5  # Некорректная вершина
+
+# try:
+#     path = dfs_path(graph, start_node, end_node)
+
+#     if path:
+#         print(f"Путь от {start_node} до {end_node}: {path}")
+#         print(f"Длина пути: {len(path) - 1}")  # Длина пути - количество ребер
+#     else:
+#         print(f"Путь от {start_node} до {end_node} не найден.")
+# except ValueError as e:
+#     print(f"Ошибка: {e}")
 
 # def dfs_path_length(graph, start_node, end_node, path=None):
 #     """
