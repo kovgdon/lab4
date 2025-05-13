@@ -12,7 +12,7 @@ def dfs_path(graph, start, end, path=None):
     if start == end:
         return path
     for neighbor in graph[start]:
-        # Проверяем, не посетили ли мы уже эту вершину
+        # patch2 - Добавлен комментарий: Проверяем, не посетили ли мы уже эту вершину
         if neighbor not in path:
             try:
                 new_path = dfs_path(graph, neighbor, end, path + [neighbor])
